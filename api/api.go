@@ -1,13 +1,17 @@
 package api
 
 import (
+	"api_state/routes"
 	"fmt"
 	"net/http"
 )
 
-var n = 0
+func FunctionsHandler(w http.ResponseWriter, r *http.Request) {
+	rts := routes.Routes{}
 
-func HandleNState(w http.ResponseWriter, r *http.Request) {
-	n++
-	fmt.Fprintln(w, n)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, "Welcome")
+	})
+	http.HandleFunc("/n-state", rts.NStateHandler)
+	http.HandleFunc("/hello", rts.HelloHandler)
 }

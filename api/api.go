@@ -14,4 +14,6 @@ func FunctionsHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	http.HandleFunc("/n-state", rts.NStateHandler)
 	http.HandleFunc("/hello", rts.HelloHandler)
+
+	http.ListenAndServe(":8001", nil)
 }

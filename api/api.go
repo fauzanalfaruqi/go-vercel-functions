@@ -1,8 +1,7 @@
 package api
 
 import (
-	"api_state/routes"
-	"encoding/json"
+	"api_state/handlers"
 	"fmt"
 	"log"
 	"net/http"
@@ -16,15 +15,8 @@ func registerRoutes(r *http.ServeMux) {
 		log.Println("log from \"/\"")
 		fmt.Fprintln(w, "Welcome")
 	})
-	r.HandleFunc("/n-state", routes.NStateHandler)
-	r.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		log.Println("log from HelloHandler()")
-		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(map[string]any{
-			"Code":    http.StatusOK,
-			"Message": "hello world!",
-		})
-	})
+	r.HandleFunc("/n-state", handlers.NStateHandler)
+	r.HandleFunc("/hello", handlers.HelloHandler)
 }
 
 func init() {

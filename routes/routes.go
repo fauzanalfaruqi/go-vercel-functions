@@ -3,19 +3,20 @@ package routes
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 )
 
-type Routes struct{}
-
 var n = 0
 
-func (rt *Routes) NStateHandler(w http.ResponseWriter, r *http.Request) {
+func NStateHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("log from NStateHandler()")
 	n++
 	fmt.Fprintln(w, n)
 }
 
-func (rt *Routes) HelloHandler(w http.ResponseWriter, r *http.Request) {
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("log from HelloHandler()")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]any{
 		"Code":    http.StatusOK,

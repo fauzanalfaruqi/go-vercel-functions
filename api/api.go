@@ -1,4 +1,4 @@
-package handler
+package api
 
 import (
 	"api_state/routes"
@@ -6,14 +6,18 @@ import (
 	"net/http"
 )
 
-func FunctionsHandler(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	rts := routes.Routes{}
+	path := r.URL.Path
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	switch path {
+	case "/n-state":
+		rts.NStateHandler(w, r)
+	case "/hello":
+		rts.HelloHandler(w, r)
+	case "/":
 		fmt.Fprintln(w, "Welcome")
-	})
-	http.HandleFunc("/n-state", rts.NStateHandler)
-	http.HandleFunc("/hello", rts.HelloHandler)
-
-	http.ListenAndServe(":8001", nil)
+	default:
+		http.NotFound(w, r) // Handle 404 for unknown paths
+	}
 }

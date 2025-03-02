@@ -7,10 +7,5 @@
             "source": "/(.*)",
             "destination": "/api/api.go"
         }
-    ],
-    "functions": {
-        "api/api.go": {
-            "maxDuration": 9
-        }
-    }
+    ]
 }

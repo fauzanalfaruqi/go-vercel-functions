@@ -14,11 +14,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	mux.HandleFunc("/", handlers.RootPathHandler)
 	mux.HandleFunc("/hello", handlers.HelloJsonHandler)
 	mux.HandleFunc("/global-state", handlers.GlobalStateHandler)
-	mux.HandleFunc("/sse", handlers.SseHandler)
 
-	// Endpoints with CORS middleware
+	// Endpoint(s) with CORS middleware
 	mux.Handle("/hello-cors", middlewares.CorsMiddleware(http.HandlerFunc(handlers.HelloJsonHandler)))
-	mux.Handle("/sse-cors", middlewares.CorsMiddleware(http.HandlerFunc(handlers.SseHandler)))
 
 	mux.ServeHTTP(w, r)
 }

@@ -62,7 +62,7 @@ func SseHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for i := 0; i < 30; i++ {
+	for i := 0; i < 7; i++ {
 		currentTime := time.Now().Format(time.RFC1123)
 		fmt.Fprintf(w, "data: The server time is = %s\n\n", currentTime)
 		flusher.Flush()
